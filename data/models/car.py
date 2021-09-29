@@ -2,8 +2,8 @@
 import mongoengine
 import uuid
 # Custom Imports
-from nosql.engine import Engine
-from nosql.service_history import ServiceHistory
+from data.models.engine import Engine
+from data.models.service_history import ServiceHistory
 
 
 class Car(mongoengine.Document):
