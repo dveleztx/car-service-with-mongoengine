@@ -1,8 +1,6 @@
 # Custom Imports
 import data.mongo_setup as mongo_setup
-from services.car_service import add_car, list_cars, \
-    find_car, service_car, show_poor_service_on_car, \
-    show_all_poorly_serviced_cars
+from services import car_service
 
 
 def main():
@@ -15,7 +13,7 @@ def main():
 def print_header():
     print('-----------------------------------------------')
     print('|                                             |')
-    print('|           SERVICE CENTRAL v.07              |')
+    print('|           SERVICE CENTRAL v.08              |')
     print('|               Demo Edition                  |')
     print('|                                             |')
     print('-----------------------------------------------')
@@ -45,17 +43,17 @@ def user_loop():
         print()
         ch = input("> ").strip().lower()
         if ch == 'a':
-            add_car()
+            car_service.create_car()
         elif ch == 'l':
-            list_cars()
+            car_service.list_cars()
         elif ch == 'f':
-            find_car()
+            car_service.find_car_by_id()
         elif ch == 's':
-            service_car()
+            car_service.service_car()
         elif ch == 'p':
-            show_poor_service_on_car()
+            car_service.show_poor_service_on_car()
         elif ch == 'd':
-            show_all_poorly_serviced_cars()
+            car_service.show_all_poorly_serviced_cars()
         elif not ch or ch == 'x':
             print("Goodbye")
             break

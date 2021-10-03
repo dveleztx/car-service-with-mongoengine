@@ -2,7 +2,7 @@ import mongoengine
 import datetime
 
 
-class ServiceHistory(mongoengine.EmbeddedDocument):
+class ServiceRecord(mongoengine.EmbeddedDocument):
     date = mongoengine.DateTimeField(default=datetime.datetime.now)
     description = mongoengine.StringField()
     price = mongoengine.FloatField()

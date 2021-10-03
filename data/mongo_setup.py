@@ -3,4 +3,4 @@ import mongoengine
 
 
 def global_init():
-    mongoengine.register_connection(alias='core', name='demo_dealership')
+    mongoengine.register_connection(alias='core', name='dealership_example')
