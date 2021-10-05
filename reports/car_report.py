@@ -4,6 +4,14 @@ from typing import List, Optional
 from data.models.car import Car
 
 
+def print_car_report(car: Car):
+    print("-" * 79)
+    print(f"- {car.year} {car.make} {car.model} -- VIN: {car.vi_number}")
+    if len(car.service_history) == 0:
+        print("  No service history found.")
+        print()
+
+
 def print_report_all_cars(cars: List[Car]):
     print("-" * 79)
     for car in cars:

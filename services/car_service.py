@@ -1,15 +1,13 @@
 # Imports
-import datetime
 from typing import Optional, List
 # Custom Imports
 import bson
-
 from data.models.car import Car
 from data.models.engine import Engine
 from data.models.owner import Owner
 from data.models.service_record import ServiceRecord
-from services.car_report_service import print_dissatisfaction_report, \
-    print_dissatisfied_reports, print_report_all_cars
+from reports.car_report import print_dissatisfaction_report, \
+    print_dissatisfied_reports, print_report_all_cars, print_car_report
 
 
 ###############################################################################
@@ -19,7 +17,8 @@ def create_owner(name: str) -> Owner:
     owner = Owner(name=name)
     owner.save()
 
-    return owner
+    print("Owner created!")
+    print()
 
 
 def create_car():
@@ -46,7 +45,7 @@ def create_car():
         car = create_car_details()
         car.save()
 
-        print("Car added!")
+        print("Car created!")
         print()
 
 
@@ -82,11 +81,10 @@ def list_cars():
 def find_car_by_id(car_id: bson.ObjectId):
     car = Car.objects(id=car_id).first()
     if car:
-        print(car)
+        print_car_report()
     else:
         print("No car found on record.")
-
-    print()
+        print()
 
 
 def find_car_by_vin(vin: str) -> Car:
@@ -126,13 +124,10 @@ def find_cars_with_bad_service() -> Optional[List[Car]]:
 
 
 # Owner Records
-def find_owner_by_name(name) -> Owner:
-    t0 = datetime.datetime.now()
+def find_owner_by_name(name):
     owner = Owner.objects(name=name).first()
-    dt = datetime.datetime.now() - t0
-    print(f"Owner found in {dt.total_seconds() * 1000} ms")
-
-    return owner
+    print(f"Owner: {owner}")
+    print()
 
 
 ###############################################################################
@@ -154,8 +149,16 @@ def service_car():
     car = find_car_by_vin(vin)
     if not car:
         print("Car does not exist on our records.")
-    owner = Owner.objects().filter(car_ids=car.id).first()
-    record_visit(owner.name)
+    owners = Owner.objects().filter(car_ids=car.id)
+
+    while True:
+        for index, owner in enumerate(owners):
+            print(f"[{index + 1}] {owner.name}")
+        owner_select = int(input("Which owner is checking in the vehicle? "))
+        if not owner_select < 1 and not owner_select > len(owners):
+            print(f"Thanks for checking in with us, {owners[owner_select - 1].name}!")
+            record_visit(owners[owner_select - 1].name)
+            break
 
     print()
 

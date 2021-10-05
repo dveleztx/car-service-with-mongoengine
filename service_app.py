@@ -11,12 +11,12 @@ def main():
 
 
 def print_header():
-    print('-----------------------------------------------')
-    print('|                                             |')
-    print('|           SERVICE CENTRAL v.08              |')
-    print('|               Demo Edition                  |')
-    print('|                                             |')
-    print('-----------------------------------------------')
+    print("-----------------------------------------------")
+    print("|                                             |")
+    print("|           SERVICE CENTRAL v1.0              |")
+    print("|              David's Edition                |")
+    print("|                                             |")
+    print("-----------------------------------------------")
     print()
 
 
@@ -26,7 +26,7 @@ def config_mongo():
 
 # def update_doc_versions():
 #     for car in Car.objects():
-#         car._mark_as_changed('vi_number')
+#         car._mark_as_changed("vi_number")
 #         car.save()
 
 
@@ -42,22 +42,22 @@ def user_loop():
         print(" * e[x]it")
         print()
         ch = input("> ").strip().lower()
-        if ch == 'a':
+        if ch == "a":
             car_service.create_car()
-        elif ch == 'l':
+        elif ch == "l":
             car_service.list_cars()
-        elif ch == 'f':
+        elif ch == "f":
             car_service.find_car_by_id()
-        elif ch == 's':
+        elif ch == "s":
             car_service.service_car()
-        elif ch == 'p':
+        elif ch == "p":
             car_service.show_poor_service_on_car()
-        elif ch == 'd':
+        elif ch == "d":
             car_service.show_all_poorly_serviced_cars()
-        elif not ch or ch == 'x':
+        elif not ch or ch == "x":
             print("Goodbye")
             break
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
